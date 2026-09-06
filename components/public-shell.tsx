@@ -11,7 +11,7 @@ export function PublicWordmark({ className = "" }: { className?: string }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="public-wordmark-mark"
-        src="/immobiliare-crest.png"
+        src="/immobiliare-crest.webp"
         width="84"
         height="84"
         style={{ width: "clamp(72px, 6vw, 84px)", height: "clamp(72px, 6vw, 84px)" }}
