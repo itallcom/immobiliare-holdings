@@ -1,0 +1,23 @@
+name: Deploy production
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: immobiliare-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64, immobiliare-production]
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy verified revision
+        run: sudo /usr/local/sbin/deploy-immobiliare "$GITHUB_WORKSPACE" "$GITHUB_SHA"

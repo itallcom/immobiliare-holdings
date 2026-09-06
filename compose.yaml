@@ -1,0 +1,10 @@
+services:
+  holdings:
+    build:
+      context: .
+    container_name: holdings-control-room
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    ports:
+      - "127.0.0.1:3000:3000"
