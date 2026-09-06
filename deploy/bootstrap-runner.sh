@@ -32,16 +32,24 @@ tar -xzf "$archive" -C "$runner_dir"
 rm -f "$archive"
 chown -R "$runner_user:$runner_user" "$runner_dir"
 
-runuser -u "$runner_user" -- "$runner_dir/config.sh" \
-  --unattended --replace \
-  --url "$repository_url" \
-  --token "$runner_token" \
-  --name immobiliare-hetzner \
-  --labels immobiliare-production \
-  --work _work
+if [[ ! -f "$runner_dir/.runner" ]]; then
+  (
+    cd "$runner_dir"
+    runuser -u "$runner_user" -- ./config.sh \
+      --unattended --replace \
+      --url "$repository_url" \
+      --token "$runner_token" \
+      --name immobiliare-hetzner \
+      --labels immobiliare-production \
+      --work _work
+  )
+fi
 unset runner_token
 
-"$runner_dir/svc.sh" install "$runner_user"
-"$runner_dir/svc.sh" start
-"$runner_dir/svc.sh" status
+(
+  cd "$runner_dir"
+  ./svc.sh install "$runner_user"
+  ./svc.sh start
+  ./svc.sh status
+)
 echo 'RUNNER_READY'
