@@ -4,30 +4,19 @@ type PublicHeaderProps = {
   inverse?: boolean;
 };
 
-export function PublicMonogram({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect x="1" y="1" width="62" height="62" stroke="currentColor" strokeWidth="2" />
-      <path d="M15 15H29M22 15V49M15 49H29" stroke="currentColor" strokeWidth="2" />
-      <path d="M37 15V49M37 32H49M49 15V49" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
-
 export function PublicWordmark({ className = "" }: { className?: string }) {
   return (
     <Link className={`public-wordmark ${className}`.trim()} href="/" aria-label="Immobiliare Holdings home">
-      <PublicMonogram className="public-wordmark-mark" />
-      <span className="public-wordmark-type">
-        <strong>Immobiliare</strong>
-        <small>Holdings</small>
-      </span>
+      {/* The approved logo is a complete lockup; do not redraw, crop, or duplicate its lettering. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="public-wordmark-mark"
+        src="/immobiliare-crest.png"
+        width="84"
+        height="84"
+        style={{ width: "clamp(72px, 6vw, 84px)", height: "clamp(72px, 6vw, 84px)" }}
+        alt=""
+      />
     </Link>
   );
 }
